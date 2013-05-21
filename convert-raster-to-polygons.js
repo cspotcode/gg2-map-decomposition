@@ -196,8 +196,17 @@ function runConversion() {
     var ball = new Body(BodyType.DYNAMIC);
     ball.shapes.add(new Circle(50));
     ball.position.setxy(2000, 350);
-    ball.angularVel = 10;
+    ball.angularVel = 60;
     ball.space = space;
+    
+    // Keyboard input
+    var keys = {};
+    window.addEventListener('keydown', function(ev) {
+        keys[ev.keyCode] = true;
+    });
+    window.addEventListener('keyup', function(ev) {
+        keys[ev.keyCode] = false;
+    });
     
     var ballElem = document.getElementById('ball');
     var framerate = 60;
@@ -209,6 +218,11 @@ function runConversion() {
         ballElem.style.left = ball.position.x - 50 + 'px';
         ballElem.style.top = ball.position.y - 50 + 'px';
         ballElem.style.webkitTransform = 'rotate(' + ball.rotation + 'rad)';
+        
+        if(keys[65]) ball.angularVel -= 1;
+        if(keys[68]) ball.angularVel += 1;
     }
     animateAFrame();
+    
+    
 };
