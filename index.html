@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Testing decomposition of an image into collision polygons</title>
+        <style>
+            canvas {
+                border: 2px solid red;
+                /*visibility: hidden;*/
+            }
+            .json-output {
+                height: 20em;
+                overflow: scroll;
+            }
+            #ball {
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                border-radius: 50px;
+                background: red;
+            }
+            .ball-line {
+                width: 100px;
+                height: 1px;
+                background: black;
+                position: absolute;
+                top: 50px;
+            }
+            .map-container {
+                position: relative;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="map-container">
+            <div id="ball">
+                <div class="ball-line"></div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            // hacky shim for requirejs so that the nape file can export itself
+            window.define = function(fn) {
+                window.nape = fn();
+            };
+        </script>
+        <script type="text/javascript" src="nape.js"></script>
+        <script type="text/javascript" src="convert-raster-to-polygons.js"></script>
+        <img id="map-img" src="map.png" onload="javascript:runConversion(); void 0" width="853" height="209"></img>
+    </body>
+</html>
